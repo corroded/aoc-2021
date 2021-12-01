@@ -4,8 +4,7 @@ depths = contents |> String.split("\n", trim: true) |> Enum.map(fn x -> String.t
 
 depths
 |> Enum.with_index()
-|> Enum.map(fn {_, i} ->
+|> Enum.count(fn {_, i} ->
   Enum.at(depths, i) < Enum.at(depths, i + 1) && Enum.at(depths, i) != Enum.at(depths, -1)
 end)
-|> Enum.count(fn y -> y == true end)
 |> IO.puts()
