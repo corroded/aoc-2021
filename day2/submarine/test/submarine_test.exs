@@ -7,6 +7,7 @@ defmodule SubmarineTest do
 
     assert submarine.depth == 0
     assert submarine.xpos == 0
+    assert submarine.aim == 0
   end
 
   describe "#move_forward" do
@@ -19,37 +20,38 @@ defmodule SubmarineTest do
       assert submarine.depth == 0
     end
 
-    test "increments xpos from a different starting point" do
-      submarine = Submarine.new(3, 4)
+    test "increments xpos BASED ON AIM from a different starting point" do
+      submarine = Submarine.new(3, 4, 5) # depth, xpos, aim
 
-      IO.inspect submarine
+      submarine = Submarine.move_forward(submarine, 2)
 
-      submarine = Submarine.move_forward(submarine, 6)
-
-      assert submarine.xpos == 10
-      assert submarine.depth == 3
+      assert submarine.depth == 13 # 3 + (5 * 2)
+      assert submarine.xpos == 6
+      assert submarine.aim == 5
     end
   end
 
   describe "#move_up" do
-    test "DECREMENTS depth from default" do
+    test "DECREMENTS aim" do
       submarine = Submarine.new()
 
       submarine = Submarine.move_up(submarine, 3)
 
       assert submarine.xpos == 0
-      assert submarine.depth == -3
+      assert submarine.depth == 0
+      assert submarine.aim == -3
     end
   end
 
   describe "#move_down" do
-    test "INCREMENTS depth from default" do
+    test "INCREMENTS aim" do
       submarine = Submarine.new()
 
       submarine = Submarine.move_down(submarine, 2)
 
       assert submarine.xpos == 0
-      assert submarine.depth == 2
+      assert submarine.depth == 0
+      assert submarine.aim == 2
     end
   end
 
@@ -68,8 +70,9 @@ defmodule SubmarineTest do
 
       submarine = Submarine.move(submarine, "up 3")
 
+      assert submarine.depth == 0
       assert submarine.xpos == 0
-      assert submarine.depth == -3
+      assert submarine.aim == -3
     end
 
     test "move down" do
@@ -77,8 +80,9 @@ defmodule SubmarineTest do
 
       submarine = Submarine.move(submarine, "down 5")
 
+      assert submarine.depth == 0
       assert submarine.xpos == 0
-      assert submarine.depth == 5
+      assert submarine.aim == 5
     end
   end
 end

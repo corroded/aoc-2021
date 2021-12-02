@@ -3,26 +3,27 @@ defmodule Submarine do
   Documentation for `Submarine`.
   """
 
-  defstruct depth: 0, xpos: 0
+  defstruct depth: 0, xpos: 0, aim: 0
 
   def new() do
     %Submarine{}
   end
 
-  def new(depth, xpos) do
-    %Submarine{depth: depth, xpos: xpos}
+  def new(depth, xpos, aim) do
+    %Submarine{depth: depth, xpos: xpos, aim: aim}
   end
 
   def move_forward(submarine, pos) do
-    %Submarine{ submarine | xpos: submarine.xpos + pos }
+    IO.inspect submarine 
+    %Submarine{ submarine | xpos: submarine.xpos + pos, depth: submarine.depth + (submarine.aim * pos) }
   end
 
   def move_up(submarine, pos) do
-    %Submarine{ submarine | depth: submarine.depth - pos }
+    %Submarine{ submarine | aim: submarine.aim - pos }
   end
 
   def move_down(submarine, pos) do
-    %Submarine{ submarine | depth: submarine.depth + pos }
+    %Submarine{ submarine | aim: submarine.aim + pos }
   end
 
   def move(submarine, movement) do
@@ -39,7 +40,7 @@ end
 submarine = Submarine.new()
 
 submarine = contents
-  |> String.split("\n", trim: true)
-  |> Enum.reduce(submarine, fn x, acc -> Submarine.move(acc, x) end)
+ |> String.split("\n", trim: true)
+ |> Enum.reduce(submarine, fn x, acc -> Submarine.move(acc, x) end)
 
 IO.inspect(submarine.depth * submarine.xpos)
