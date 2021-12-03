@@ -14,7 +14,6 @@ defmodule Submarine do
   end
 
   def move_forward(submarine, pos) do
-    IO.inspect submarine 
     %Submarine{ submarine | xpos: submarine.xpos + pos, depth: submarine.depth + (submarine.aim * pos) }
   end
 
