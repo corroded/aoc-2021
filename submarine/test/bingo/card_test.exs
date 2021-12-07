@@ -28,7 +28,7 @@ defmodule SubmarineBingoCardTest do
     test "it is true when one of the horizontal rows has a bingo match", context do
       numbers = "22,13,17,11,0"
 
-      card = Submarine.Bingo.Card.new(marks: context[:marks])
+      card = Submarine.Bingo.Card.new(context[:marks])
 
       assert Submarine.Bingo.Card.winning?(card, numbers) == true
     end
@@ -36,9 +36,17 @@ defmodule SubmarineBingoCardTest do
     test "it is false when no horizontal row matches", context do
       numbers = "22,13,17,11,1"
 
-      card = Submarine.Bingo.Card.new(marks: context[:marks])
+      card = Submarine.Bingo.Card.new(context[:marks])
 
       assert Submarine.Bingo.Card.winning?(card, numbers) == false
+    end
+
+    test "it is true even if it is not in order", context do
+      numbers = "0,22,13,17,11"
+
+      card = Submarine.Bingo.Card.new(context[:marks])
+
+      assert Submarine.Bingo.Card.winning?(card, numbers) == true
     end
   end
 
