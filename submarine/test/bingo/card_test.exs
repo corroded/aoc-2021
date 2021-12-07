@@ -48,6 +48,25 @@ defmodule SubmarineBingoCardTest do
 
       assert Submarine.Bingo.Card.winning?(card, numbers) == true
     end
+
+    test "it is true for vertical matches", context do
+      numbers = "17,23,3,14,20"
+
+      card = Submarine.Bingo.Card.new(context[:marks])
+
+      assert Submarine.Bingo.Card.winning?(card, numbers) == true
+    end
+
+    test "it is true even if there are numbers in between", context do
+      numbers = "17,23,4,10,3,14,20"
+
+      card = Submarine.Bingo.Card.new(context[:marks])
+      assert Submarine.Bingo.Card.winning?(card, numbers) == true
+
+      more_numbers = "0,3,14,10,6,18,12,5"
+
+      assert Submarine.Bingo.Card.winning?(card, more_numbers) == true
+    end
   end
 
   defp sample_bingo_card(_) do
