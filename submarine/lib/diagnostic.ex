@@ -1,19 +1,5 @@
 
 defmodule Submarine.Diagnostic do
-  defstruct gamma_bits: "", epsilon_bits: ""
-
-  def new() do
-    %Submarine.Diagnostic{}
-  end
-
-  def new(gamma_bits, epsilon_bits) do
-    %Submarine.Diagnostic{gamma_bits: gamma_bits, epsilon_bits: epsilon_bits}
-  end
-
-  def new(gamma_bits) do
-    %Submarine.Diagnostic{gamma_bits: gamma_bits}
-  end
-
   def gamma_rate_calc(bits) do
     bits
       |> Submarine.Utils.transpose()
