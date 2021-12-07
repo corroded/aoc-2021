@@ -69,6 +69,17 @@ defmodule SubmarineBingoCardTest do
     end
   end
 
+  describe "#unmarked_total" do
+    setup [:winning_card]
+
+    test "it sums the value of the unmarked numbers of a winning card", context do
+      numbers = "7,4,9,5,11,17,23,2,0,14,21,24"
+
+      card = Submarine.Bingo.Card.new(context[:marks])
+      assert Submarine.Bingo.Card.unmarked_total(card, numbers) == 188
+    end
+  end
+
   defp sample_bingo_card(_) do
     {:ok, [marks: [
       "22 13 17 11  0",
@@ -76,6 +87,16 @@ defmodule SubmarineBingoCardTest do
       "21  9 14 16  7",
       " 6 10  3 18  5",
       " 1 12 20 15 19",
+    ]]}
+  end
+
+  defp winning_card(_) do
+    {:ok, [marks: [
+      "14 21 17 24  4",
+      "10 16 15  9 19",
+      "18  8 23 26 20",
+      "22 11 13  6  5",
+      " 2  0 12  3  7"
     ]]}
   end
 end
