@@ -16,7 +16,7 @@ defmodule Submarine.Diagnostic do
 
   def gamma_rate_calc(bits) do
     bits
-      |> vertical_bits()
+      |> Submarine.Utils.transpose()
       |> Enum.map(fn x -> Enum.frequencies(x) end)
       |> Enum.map(fn x ->
         cond do
@@ -35,7 +35,7 @@ defmodule Submarine.Diagnostic do
 
   def epsilon_rate_calc(bits) do
     bits
-      |> vertical_bits()
+      |> Submarine.Utils.transpose()
       |> Enum.map(fn x -> Enum.frequencies(x) end)
       |> Enum.map(fn x ->
         cond do
@@ -50,13 +50,6 @@ defmodule Submarine.Diagnostic do
         end
       end)
       |> Enum.join()
-  end
-
-  def vertical_bits(bits) do
-    bits
-    |> Enum.map(fn x -> String.split(x, "") |> Enum.reject(fn y -> y == "" end) end)
-    |> List.zip
-    |> Enum.map(&Tuple.to_list/1)
   end
 
   def gamma_rate(bits) do

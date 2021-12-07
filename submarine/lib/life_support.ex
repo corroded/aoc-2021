@@ -1,7 +1,7 @@
 defmodule Submarine.LifeSupport do
   def filter_at_position(bits, position, func) do
     filter = bits
-      |> Submarine.Diagnostic.vertical_bits()
+      |> Submarine.Utils.transpose()
       |> Enum.at(position)
       |> Enum.frequencies()
       |> func.()
