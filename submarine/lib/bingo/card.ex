@@ -14,9 +14,11 @@ defmodule Submarine.Bingo.Card do
   end
 
   def winning?(card, numbers) do
-    matcher = numbers |> String.split(",", trim: true)
+    matcher = numbers
+    |> String.split(",", trim: true)
 
-    card.marks |> Enum.any?(fn x -> (x -- matcher) == [] end)
+    card.marks
+    |> Enum.any?(fn x -> (x -- matcher) == [] end)
   end
 
   def unmarked_total(card, numbers) do
