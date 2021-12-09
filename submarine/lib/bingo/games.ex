@@ -11,8 +11,7 @@ defmodule Submarine.Bingo.Games do
   end
 
   def get_winning_number(cards, numbers, index) when index < length(numbers) do
-    portion = numbers |> Enum.slice(0..index)
-    number_string = portion |> Enum.join(",")
+    number_string = numbers |> Enum.slice(0..index) |> Enum.join(",")
 
     winning_card = cards
       |> Enum.find(
@@ -26,12 +25,11 @@ defmodule Submarine.Bingo.Games do
     end
   end
 
-  @spec get_winning_number(any, list) :: any
-  def get_winning_number(cards, numbers) do
-    get_winning_number(cards, numbers, 0)
+  def get_winning_number(_cards, numbers, index) when length(numbers) == index do
+    IO.puts("something must have gone wrong or the last number is the winning number")
   end
 
-  def get_winning_number(cards, numbers, index) when length(numbers) == index do
-    IO.puts("something must have gone wrong or the last number is the winning number")
+  def get_winning_number(cards, numbers) do
+    get_winning_number(cards, numbers, 0)
   end
 end
