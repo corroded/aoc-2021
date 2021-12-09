@@ -21,6 +21,14 @@ defmodule SubmarineBingoGamesTest do
     end
   end
 
+  describe "#run_loser" do
+    setup [:day4_example]
+
+    test "it returns final score of LAST winning card", context do
+      assert Submarine.Bingo.Games.run_loser(context[:input]) == 1924
+    end
+  end
+
   defp day4_example(_) do
     {:ok, [input: Submarine.read_input("test/fixtures/day4.txt")]}
   end
