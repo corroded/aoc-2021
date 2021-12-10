@@ -49,6 +49,20 @@ defmodule SubmarineLineTest do
         Point.new([1,7]),
         Point.new([0,8]),
       ]
+
+      reverse_points = [Point.new([0,8]), Point.new([8,0])]
+
+      assert Submarine.Geometry.Line.draw(reverse_points) == [
+        Point.new([0,8]),
+        Point.new([1,7]),
+        Point.new([2,6]),
+        Point.new([3,5]),
+        Point.new([4,4]),
+        Point.new([5,3]),
+        Point.new([6,2]),
+        Point.new([7,1]),
+        Point.new([8,0]),
+      ]
     end
 
     test "-45deg diagonal line" do
