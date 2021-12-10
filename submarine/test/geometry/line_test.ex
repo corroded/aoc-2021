@@ -3,6 +3,39 @@ defmodule SubmarineLineTest do
 
   alias Submarine.Geometry.Point, as: Point
 
+  describe "#draw" do
+    test "vertical lines returns a list of points with the same ycoord" do
+      points = [Point.new([0,9]), Point.new([5,9])]
+
+      assert Submarine.Geometry.Line.draw(points) == [
+        Point.new([0,9]),
+        Point.new([1,9]),
+        Point.new([2,9]),
+        Point.new([3,9]),
+        Point.new([4,9]),
+        Point.new([5,9]),
+      ]
+    end
+
+    test "horizontal_line returns a list of points with the same xcoord" do
+      points = [Point.new([7,0]), Point.new([7,4])]
+
+      assert Submarine.Geometry.Line.draw(points) == [
+        Point.new([7,0]),
+        Point.new([7,1]),
+        Point.new([7,2]),
+        Point.new([7,3]),
+        Point.new([7,4]),
+      ]
+    end
+
+    test "diagonal returns nil" do
+      points = [Point.new([8,0]), Point.new([0,8])]
+
+      assert Submarine.Geometry.Line.draw(points) == []
+    end
+  end
+
   describe "#vertical_line?" do
     test "returns true if ycoord is the same" do
       points = [
