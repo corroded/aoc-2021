@@ -6,4 +6,8 @@ defmodule Submarine.Geometry.Point do
 
     %Submarine.Geometry.Point{xcoord: x, ycoord: y |> List.first()}
   end
+
+  def to_s(point) do
+    [point.xcoord, point.ycoord] |> Enum.join(",")
+  end
 end
