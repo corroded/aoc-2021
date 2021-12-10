@@ -13,20 +13,21 @@ defmodule Submarine.Geometry.Line do
     end_point = end_point |> List.first()
 
     cond do
-      vertical_line?(points) ->
+      vertical_line?(start_point, end_point) ->
         start_point.xcoord..end_point.xcoord |> Enum.map(fn x -> Point.new([x, end_point.ycoord]) end)
-      horizontal_line?(points) ->
+      horizontal_line?(start_point, end_point) ->
         start_point.ycoord..end_point.ycoord |> Enum.map(fn x -> Point.new([start_point.xcoord, x]) end)
       true ->
         []
     end
   end
 
-  def vertical_line?(points) do
-    (points |> Enum.map(fn x -> x.ycoord end) |> Enum.uniq() |> Enum.count()) == 1
+  def vertical_line?(start_point, end_point) do
+    start_point.ycoord == end_point.ycoord
   end
 
-  def horizontal_line?(points) do
-    (points |> Enum.map(fn x -> x.xcoord end) |> Enum.uniq() |> Enum.count()) == 1
+  def horizontal_line?(start_point, end_point) do
+    start_point.xcoord == end_point.xcoord
   end
+
 end

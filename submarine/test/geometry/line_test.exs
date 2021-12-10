@@ -29,50 +29,69 @@ defmodule SubmarineLineTest do
       ]
     end
 
-    test "diagonal returns nil" do
-      points = [Point.new([8,0]), Point.new([0,8])]
+    test "non-45deg diagonal line" do
+      points = [Point.new([9,0]), Point.new([5,1])]
 
       assert Submarine.Geometry.Line.draw(points) == []
+    end
+
+    test "45deg diagonal line" do
+      points = [Point.new([8,0]), Point.new([0,8])]
+
+      assert Submarine.Geometry.Line.draw(points) == [
+        Point.new([8,0]),
+        Point.new([7,1]),
+        Point.new([6,2]),
+        Point.new([5,3]),
+        Point.new([4,4]),
+        Point.new([3,5]),
+        Point.new([2,6]),
+        Point.new([1,7]),
+        Point.new([0,8]),
+      ]
+    end
+
+    test "-45deg diagonal line" do
+      points = [Point.new([0,0]), Point.new([3,3])]
+
+      assert Submarine.Geometry.Line.draw(points) == [
+        Point.new([0,0]),
+        Point.new([1,1]),
+        Point.new([2,2]),
+        Point.new([3,3]),
+      ]
     end
   end
 
   describe "#vertical_line?" do
     test "returns true if ycoord is the same" do
-      points = [
+      assert Submarine.Geometry.Line.vertical_line?(
         Point.new([0,9]),
-        Point.new([5,9]),
-      ]
-
-      assert Submarine.Geometry.Line.vertical_line?(points) == true
+        Point.new([5,9])
+      ) == true
     end
 
     test "returns false if ycoord is not the same" do
-      points = [
+      assert Submarine.Geometry.Line.vertical_line?(
         Point.new([0,0]),
-        Point.new([0,9]),
-      ]
-
-      assert Submarine.Geometry.Line.vertical_line?(points) == false
+        Point.new([0,9])
+      ) == false
     end
   end
 
   describe "#horizontal_line?" do
     test "returns true if xcoord is the same" do
-      points = [
+      assert Submarine.Geometry.Line.horizontal_line?(
         Point.new([0,2]),
-        Point.new([0,1]),
-      ]
-
-      assert Submarine.Geometry.Line.horizontal_line?(points) == true
+        Point.new([0,1])
+      ) == true
     end
 
     test "returns false if xcoord is not the same" do
-      points = [
+      assert Submarine.Geometry.Line.horizontal_line?(
         Point.new([0,5]),
-        Point.new([9,5]),
-      ]
-
-      assert Submarine.Geometry.Line.horizontal_line?(points) == false
+        Point.new([9,5])
+      ) == false
     end
   end
 end
