@@ -69,9 +69,6 @@ defmodule Submarine.Bingo.Games do
       end)
 
     if winning_card do
-      index |> IO.inspect()
-      numbers |> Enum.count() |> IO.inspect()
-
       (numbers
       |> Enum.at(index)
       |> String.to_integer()) * Submarine.Bingo.Card.unmarked_total(winning_card, number_string)
