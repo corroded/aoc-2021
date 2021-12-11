@@ -3,7 +3,19 @@ defmodule SubmarineTest do
   doctest Submarine
 
   describe "#read_input" do
-    assert Submarine.read_input("test.txt") == ["hello", "world"]
+    test "regular input" do
+      assert Submarine.read_input("test.txt") == ["hello", "world"]
+    end
+  end
+
+  describe "#read_line" do
+    test "reads a single line and returns a map" do
+      assert Submarine.read_line("test/fixtures/single_line.txt") == ["hello", "one", "line"]
+    end
+
+    test "reads a single line and coerces to int" do
+      assert Submarine.read_line("test/fixtures/single_line_int.txt", true) == [1,3,4]
+    end
   end
 
   test "starts at 0 0" do

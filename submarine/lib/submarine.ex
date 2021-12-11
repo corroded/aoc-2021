@@ -9,6 +9,20 @@ defmodule Submarine do
     contents |> String.split("\n", trim: true)
   end
 
+  def read_line(filename) do
+    {:ok, contents} = File.read(filename)
+
+    contents
+    |> String.split("\n", trim: true)
+    |> List.first()
+    |> String.split(",", trim: true)
+  end
+
+  def read_line(filename, coerce_int) when coerce_int do
+    read_line(filename)
+    |> Enum.map(&String.to_integer/1)
+  end
+
   defstruct depth: 0, xpos: 0, aim: 0
 
   def new() do
