@@ -5,7 +5,7 @@ defmodule SubmarinePointTest do
 
   describe "#to_s" do
     test "it returns it back to a string" do
-      assert(Point.new([0,9])) == "0,9"
+      assert Point.to_s(Point.new([0,9])) == "0,9"
     end
   end
 end
